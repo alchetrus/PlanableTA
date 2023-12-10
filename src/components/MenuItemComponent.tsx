@@ -8,15 +8,19 @@ interface MenuItemComponentProps {
   itemIcon: string;
   onClick: () => void;
 }
-export const MenuItemComponent = (props: MenuItemComponentProps) => {
+export const MenuItemComponent = ({
+  itemIcon,
+  itemTitle,
+  onClick,
+}: MenuItemComponentProps) => {
   return (
-    <Pressable onPress={props.onClick}>
-      <View style={styles.menuItemView}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <Pressable onPress={onClick}>
+      <View style={styles.menuItemViewContainer}>
+        <View style={styles.menuIconTitleContainer}>
           <View style={styles.iconContainer}>
-            <Icon name={props.itemIcon} style={styles.menuItemImage} />
+            <Icon name={itemIcon} style={styles.menuItemImage} />
           </View>
-          <Text style={styles.menuItemText}>{props.itemTitle}</Text>
+          <Text style={styles.menuItemText}>{itemTitle}</Text>
         </View>
         <Icon name={'chevron-right'} style={styles.menuItemIcon} />
       </View>
@@ -25,7 +29,7 @@ export const MenuItemComponent = (props: MenuItemComponentProps) => {
 };
 
 const styles = StyleSheet.create({
-  menuItemView: {
+  menuItemViewContainer: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -56,5 +60,9 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 20,
     color: 'black',
+  },
+  menuIconTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

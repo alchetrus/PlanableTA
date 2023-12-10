@@ -10,13 +10,15 @@ import {
 import {ModalTitleComponent} from '../components/ModalTitleComponent.tsx';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
-  functionalError100, neutral100, neutral80,
+  functionalError100,
+  neutral100,
+  neutral80,
   primary100,
   secondary20,
   secondary40,
   secondary60,
-  secondary80
-} from "../constants/colors.ts";
+  secondary80,
+} from '../constants/colors.ts';
 
 type NameAndEmailScreenProps = {
   navigation: NativeStackNavigationProp<any, 'NameAndEmailScreen'>;
@@ -28,7 +30,11 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
   const [nameError, setNameError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
   const secondTextInputRef = useRef<TextInput>(null);
+  const [isNameFocused, setNameFocused] = useState(false);
+  const [isEmailFocused, setEmailFocused] = useState(false);
+
   const isInputEmpty = () => nameValue === '' || emailValue === '';
+
   const validateName = (name: string) => {
     if (!/^[a-zA-Z ]+$/.test(name)) {
       setNameError('Name should only contain alphabets and spaces');
@@ -37,7 +43,6 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
     setNameError('');
     return true;
   };
-
   const validateEmail = (email: string) => {
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       setEmailError('This email address is invalid');
@@ -46,18 +51,25 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
     setEmailError('');
     return true;
   };
+
   return (
     <View>
-      <Modal animationType={'slide'} visible={true}>
+      <Modal
+        animationType={'slide'}
+        visible={true}
+        presentationStyle={'pageSheet'}>
         <ModalTitleComponent
           modalTitle={'Name & Email'}
-          onClicked={() => navigation.goBack()}
+          onClicked={() => navigation.replace('MainScreen')}
         />
         <View style={styles.mainContainer}>
-          <View style={{marginBottom: 24}}>
+          <View style={styles.textInputContainer}>
             <Text style={styles.labelText}>Name</Text>
             <TextInput
-              style={styles.textInput}
+              style={[
+                styles.textInput,
+                isNameFocused && {borderColor: primary100},
+              ]}
               placeholder={'Your Name'}
               placeholderTextColor={secondary80}
               value={nameValue}
@@ -67,6 +79,8 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
               onSubmitEditing={() => secondTextInputRef.current?.focus()}
               blurOnSubmit={false}
               returnKeyType={'next'}
+              onFocus={() => setNameFocused(true)}
+              onBlur={() => setNameFocused(false)}
             />
             {nameError && <Text style={styles.errorText}>{nameError}</Text>}
           </View>
@@ -74,7 +88,10 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
           <View>
             <Text style={styles.labelText}>Email</Text>
             <TextInput
-              style={styles.textInput}
+              style={[
+                styles.textInput,
+                isEmailFocused && {borderColor: primary100},
+              ]}
               placeholder={'Email Address'}
               placeholderTextColor={secondary80}
               value={emailValue}
@@ -82,7 +99,11 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
                 setEmailValue(text);
                 setEmailError('');
               }}
-              onFocus={() => setEmailError('')}
+              onFocus={() => {
+                setEmailError('');
+                setEmailFocused(true);
+              }}
+              onBlur={() => setEmailFocused(false)}
               ref={secondTextInputRef}
             />
             {emailError && <Text style={styles.errorText}>{emailError}</Text>}
@@ -110,6 +131,9 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
 };
 
 const styles = StyleSheet.create({
+  textInputContainer: {
+    marginBottom: 24,
+  },
   textInput: {
     borderRadius: 8,
     borderColor: secondary40,

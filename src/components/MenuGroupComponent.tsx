@@ -7,11 +7,14 @@ interface MenuGroupComponentProps {
   children: ReactNode;
 }
 
-export const MenuGroupComponent = (props: MenuGroupComponentProps) => {
+export const MenuGroupComponent = ({
+  groupTitle,
+  children,
+}: MenuGroupComponentProps) => {
   return (
     <View style={styles.menuGroupContainer}>
-      <Text style={styles.menuGroupText}>{props.groupTitle}</Text>
-      {props.children}
+      <Text style={styles.menuGroupText}>{groupTitle}</Text>
+      {children}
     </View>
   );
 };

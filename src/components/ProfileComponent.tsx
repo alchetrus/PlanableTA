@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import { secondary60 } from "../constants/colors.ts";
+import {secondary60} from '../constants/colors.ts';
 
 export const ProfileComponent = () => {
   const profileImage = require('../assets/profile.jpg');

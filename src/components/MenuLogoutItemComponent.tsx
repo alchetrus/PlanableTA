@@ -1,12 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { functionalError100, functionalError80, functionalErrorTransparent } from "../constants/colors.ts";
+import {
+  functionalError100,
+  functionalError80,
+  functionalErrorTransparent,
+} from '../constants/colors.ts';
 
 export const MenuLogoutItemComponent = () => {
   return (
-    <View style={styles.menuItemView}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View style={styles.menuItemViewContainer}>
+      <View style={styles.menuIconTitleContainer}>
         <View style={styles.iconContainer}>
           <Icon name={'logout'} style={styles.menuItemImage} />
         </View>
@@ -17,7 +21,7 @@ export const MenuLogoutItemComponent = () => {
 };
 
 const styles = StyleSheet.create({
-  menuItemView: {
+  menuItemViewContainer: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -44,5 +48,9 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 20,
     color: functionalError100,
+  },
+  menuIconTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

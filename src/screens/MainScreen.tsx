@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Modal, ScrollView, StyleSheet, View} from 'react-native';
 import {ProfileComponent} from '../components/ProfileComponent.tsx';
 import {MenuGroupComponent} from '../components/MenuGroupComponent.tsx';
@@ -6,17 +6,17 @@ import {MenuItemComponent} from '../components/MenuItemComponent.tsx';
 import {MenuLogoutItemComponent} from '../components/MenuLogoutItemComponent.tsx';
 import {ModalTitleComponent} from '../components/ModalTitleComponent.tsx';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-//TODO: FIX INLINE STYLES
-//TODO: FIND BETTER STYLE NAMES
 
 type MainScreenProps = {
   navigation: NativeStackNavigationProp<any, 'MainScreen'>;
 };
 
 export const MainScreen = ({navigation}: MainScreenProps) => {
+  const [isVisible, setIsVisible] = useState(true);
+
   return (
     <View>
-      <Modal animationType={'slide'} visible={true}>
+      <Modal animationType={'slide'} visible={isVisible}>
         <ModalTitleComponent modalTitle={'Profile'} onClicked={() => {}} />
         <ScrollView style={styles.scrollView}>
           <View>
@@ -27,6 +27,7 @@ export const MainScreen = ({navigation}: MainScreenProps) => {
               itemTitle={'Name & Email'}
               itemIcon={'person-outline'}
               onClick={() => {
+                setIsVisible(false);
                 navigation.navigate('NameAndEmailScreen');
               }}
             />
@@ -80,7 +81,7 @@ export const MainScreen = ({navigation}: MainScreenProps) => {
               onClick={() => {}}
             />
           </MenuGroupComponent>
-          <View style={{marginVertical: 24}}>
+          <View style={styles.menuLogoutContainer}>
             <MenuLogoutItemComponent />
           </View>
         </ScrollView>
@@ -93,5 +94,8 @@ const styles = StyleSheet.create({
   scrollView: {
     paddingHorizontal: 16,
     paddingTop: 24,
+  },
+  menuLogoutContainer: {
+    marginVertical: 24,
   },
 });

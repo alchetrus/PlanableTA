@@ -12,11 +12,11 @@ function App(): React.JSX.Element {
     <SafeAreaView>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name={'MainScreen'} component={MainScreen} />
           <Stack.Screen
             name={'NameAndEmailScreen'}
             component={NameAndEmailScreen}
           />
-          <Stack.Screen name={'MainScreen'} component={MainScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
