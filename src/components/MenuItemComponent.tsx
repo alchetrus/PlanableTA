@@ -8,6 +8,7 @@ interface MenuItemComponentProps {
   itemIcon: string;
   onClick: () => void;
 }
+
 export const MenuItemComponent = ({
   itemIcon,
   itemTitle,

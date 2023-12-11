@@ -43,6 +43,7 @@ export const NameAndEmailScreen = ({navigation}: NameAndEmailScreenProps) => {
     setNameError('');
     return true;
   };
+
   const validateEmail = (email: string) => {
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       setEmailError('This email address is invalid');

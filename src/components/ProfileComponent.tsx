@@ -4,6 +4,7 @@ import {secondary60} from '../constants/colors.ts';
 
 export const ProfileComponent = () => {
   const profileImage = require('../assets/profile.jpg');
+
   return (
     <View style={styles.profileView}>
       <Image style={styles.profileImage} source={profileImage} />

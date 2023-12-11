@@ -7,6 +7,7 @@ interface ModalTitleComponentProps {
   modalTitle: string;
   onClicked: () => void;
 }
+
 export const ModalTitleComponent = ({
   modalTitle,
   onClicked,
